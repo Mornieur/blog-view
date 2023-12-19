@@ -4,7 +4,7 @@ const createJestConfig = require('jest-create-config');
 const config = createJestConfig({
   testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
+    '^.+\\.(ts|tsx|js|jsx)$': 'babel-jest',
   },
   setupFilesAfterEnv: ['<rootDir>/src/tests/setupTests.ts'],
 
