@@ -5,9 +5,9 @@ import DataPost from '../components/DataPost';
 import { Box } from '@mui/material';
 import Footer from '../components/Footer';
 
-const LoadingMessage = () => <h1>Carregando...</h1>;
+const LoadingMessage = () => <h1>Loading...</h1>;
 const ErrorMessage = () => (
-  <h1>Erro ao carregar o post ou o post não existe.</h1>
+  <h1>Error loading the post or the post does not exist.</h1>
 );
 
 interface Params {

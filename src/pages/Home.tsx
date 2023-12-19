@@ -57,7 +57,7 @@ const Home = () => {
             variant="body1"
             sx={{ textAlign: 'center', marginTop: 2 }}
           >
-            Carregando...
+            Loading...
           </Typography>
         </Box>
       ) : (
@@ -96,7 +96,7 @@ const Home = () => {
       )}
       {!isLoading && isError && (
         <Typography variant="body1" sx={{ textAlign: 'center' }}>
-          Ocorreu um erro. Tente novamente mais tarde.
+          An error has occurred. Try again later.
         </Typography>
       )}
 

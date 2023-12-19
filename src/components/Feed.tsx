@@ -1,6 +1,5 @@
 import React from 'react';
 import { List, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import { BlogPost } from '../services/useGetBlogPosts';
 import PostItem from './PostItem';
 
@@ -15,16 +14,20 @@ const Feed: React.FC<FeedProps> = ({
   searchQuery,
   isLoading,
   isError,
-
   posts,
 }) => {
-  const navigate = useNavigate();
-
   const filteredPosts = posts.filter(
     (post) =>
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.body.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  if (isLoading) {
+    return <div data-testid="loading-indicator">Loading...</div>;
+  }
+  if (isError) {
+    return <div data-testid="error-message">Error loading posts.</div>;
+  }
 
   return (
     <div
@@ -47,7 +50,7 @@ const Feed: React.FC<FeedProps> = ({
       >
         {!isLoading && !isError && filteredPosts.length === 0 && (
           <Typography variant="body1" sx={{ textAlign: 'center' }}>
-            Nenhuma postagem encontrada.
+            No posts found.
           </Typography>
         )}
         {!isLoading &&

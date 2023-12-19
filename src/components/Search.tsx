@@ -57,7 +57,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ setSearchQuery }) => {
         value={inputValue}
         onChange={handleInputChange}
         sx={inputBaseStyles}
-        placeholder="Pesquisar..."
+        placeholder="Search..."
       />
       <IconButton type="submit" aria-label="search" sx={iconButtonStyles} />
     </form>
