@@ -14,7 +14,6 @@ import { useNavigate } from 'react-router-dom';
 
 type PostItemProps = {
   post: BlogPost;
-  isLast: boolean;
 };
 
 const listItemStyles: SxProps<Theme> = {
@@ -50,7 +49,7 @@ const buttonStyles: SxProps<Theme> = {
   mr: 3,
 };
 
-const PostItem: React.FC<PostItemProps> = ({ post, isLast }) => {
+const PostItem: React.FC<PostItemProps> = ({ post }) => {
   const navigate = useNavigate();
 
   const handleDataBlog = () => {
@@ -63,6 +62,7 @@ const PostItem: React.FC<PostItemProps> = ({ post, isLast }) => {
       key={post.id}
       alignItems="flex-start"
       sx={listItemStyles}
+      id="posts-list"
     >
       <Box sx={boxStyles}>
         <Skeleton variant="circular" width={40} height={40} />
