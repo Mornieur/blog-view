@@ -2,12 +2,29 @@ import { useParams } from 'react-router-dom';
 import { useBlogPosts } from '../services/useGetBlogPosts';
 import HeaderPost from '../components/HeaderPost';
 import DataPost from '../components/DataPost';
-import { Box } from '@mui/material';
+import {
+  Box,
+  CircularProgress,
+  SxProps,
+  Theme,
+  Typography,
+} from '@mui/material';
 import Footer from '../components/Footer';
 
-const LoadingMessage = () => <h1>Loading...</h1>;
+const boxStyles: SxProps<Theme> = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '100%',
+  height: '100vh',
+  gap: 3,
+};
+
+const LoadingMessage = () => <Typography variant="h5">Loading...</Typography>;
 const ErrorMessage = () => (
-  <h1>Error loading the post or the post does not exist.</h1>
+  <Typography variant="h5">
+    Error loading the post or the post does not exist.
+  </Typography>
 );
 
 interface Params {
@@ -25,11 +42,20 @@ const Post = () => {
 
   const renderPostData = () => {
     if (isLoading) {
-      return <LoadingMessage />;
+      return (
+        <Box sx={boxStyles}>
+          <LoadingMessage />
+          <CircularProgress />
+        </Box>
+      );
     }
 
     if (isError || !allInfoBlog.length) {
-      return <ErrorMessage />;
+      return (
+        <Box sx={boxStyles}>
+          <ErrorMessage />
+        </Box>
+      );
     }
 
     const { title, body } = allInfoBlog[0];

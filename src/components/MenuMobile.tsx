@@ -8,6 +8,8 @@ import {
   ListItemText,
   Divider,
   ListItemButton,
+  SxProps,
+  Theme,
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import MailIcon from '@mui/icons-material/Mail';
@@ -20,6 +22,20 @@ interface MenuMobileProps {
 }
 
 const drawerWidth = 240;
+
+const menuMobileStyles: SxProps<Theme> = {
+  top: 'auto',
+  bottom: 0,
+  backgroundColor: '#6e3296',
+  color: 'white',
+  boxShadow: '0 -2px 5px 0 rgba(0,0,0,0.2)',
+};
+
+const iconButtonStyles = {
+  width: '20px',
+  p: 1,
+  ml: 1,
+};
 
 const MenuMobile: React.FC<MenuMobileProps> = ({ setSuggestionOn }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,16 +55,7 @@ const MenuMobile: React.FC<MenuMobileProps> = ({ setSuggestionOn }) => {
 
   return (
     <>
-      <AppBar
-        position="fixed"
-        sx={{
-          top: 'auto',
-          bottom: 0,
-          backgroundColor: '#6e3296',
-          color: 'white',
-          boxShadow: '0 -2px 5px 0 rgba(0,0,0,0.2)',
-        }}
-      >
+      <AppBar position="fixed" sx={menuMobileStyles}>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <IconButton
             onClick={() => setSuggestionOn(false)}
@@ -85,7 +92,11 @@ const MenuMobile: React.FC<MenuMobileProps> = ({ setSuggestionOn }) => {
           '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
         }}
       >
-        <IconButton onClick={handleDrawerToggle} aria-label="close drawer">
+        <IconButton
+          onClick={handleDrawerToggle}
+          sx={iconButtonStyles}
+          aria-label="close drawer"
+        >
           <ChevronLeftIcon />
         </IconButton>
         <Divider />

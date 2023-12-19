@@ -1,5 +1,14 @@
 import React from 'react';
-import { List, Typography } from '@mui/material';
+import {
+  Box,
+  CircularProgress,
+  List,
+  ListItem,
+  SxProps,
+  Theme,
+  Typography,
+} from '@mui/material';
+
 import { BlogPost } from '../services/useGetBlogPosts';
 import PostItem from './PostItem';
 
@@ -8,6 +17,45 @@ type FeedProps = {
   isLoading: boolean;
   isError: boolean;
   posts: BlogPost[];
+};
+
+const listItemStylesError: SxProps<Theme> = {
+  mb: 1,
+  gap: 1,
+  display: 'flex',
+  flexDirection: 'column',
+};
+
+const typographyStylesError: SxProps<Theme> = {
+  variant: 'body1',
+  color: '#4a494a',
+  fontWeight: 600,
+  width: '100%',
+};
+
+const boxNotFound: SxProps<Theme> = {
+  display: 'flex',
+  gap: 1,
+  mb: 1,
+  ml: 0.5,
+  mt: 1,
+  maxWidth: 700,
+  width: '100%',
+  height: '100vh',
+  textAlign: 'center',
+  alignItems: 'center',
+};
+
+const postListStyle: SxProps<Theme> = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  margin: '0 2rem',
+  padding: '0 0.5rem',
+  width: '100%',
+  maxWidth: 700,
+  borderRadius: '10px',
+  backgroundColor: '#fff',
 };
 
 const Feed: React.FC<FeedProps> = ({
@@ -22,49 +70,40 @@ const Feed: React.FC<FeedProps> = ({
       post.body.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  if (isLoading) {
-    return <div data-testid="loading-indicator">Loading...</div>;
-  }
-  if (isError) {
-    return <div data-testid="error-message">Error loading posts.</div>;
-  }
-
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-      }}
-    >
-      <List
-        data-testid="post-list"
-        sx={{
-          margin: '0 2rem',
-          padding: '0 0.5rem',
-          width: '100%',
-          maxWidth: 700,
-          borderRadius: '10px',
-          backgroundColor: '#fff',
-        }}
-      >
-        {!isLoading && !isError && filteredPosts.length === 0 && (
-          <Typography variant="body1" sx={{ textAlign: 'center' }}>
+    <List data-testid="post-list" sx={postListStyle}>
+      {isError && (
+        <ListItem sx={listItemStylesError}>
+          <Typography
+            sx={typographyStylesError}
+            variant="body1"
+            data-testid="error-message"
+          >
+            Error loading posts.
+          </Typography>
+        </ListItem>
+      )}
+
+      {!isLoading && !isError && filteredPosts.length === 0 && (
+        <Box sx={boxNotFound}>
+          <Typography sx={typographyStylesError} variant="body1">
             No posts found.
           </Typography>
-        )}
-        {!isLoading &&
-          !isError &&
-          filteredPosts.length > 0 &&
-          filteredPosts.map((post, index) => (
-            <PostItem
-              key={post.id}
-              post={post}
-              isLast={filteredPosts.length === index + 1}
-            />
-          ))}
-      </List>
-    </div>
+        </Box>
+      )}
+
+      {!isLoading &&
+        !isError &&
+        filteredPosts.length > 0 &&
+        filteredPosts.map((post) => <PostItem key={post.id} post={post} />)}
+
+      {isLoading && (
+        <ListItem data-testid="loading-indicator" sx={listItemStylesError}>
+          Loading...
+          <CircularProgress />
+        </ListItem>
+      )}
+    </List>
   );
 };
 
