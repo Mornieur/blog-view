@@ -30,6 +30,7 @@ const boxStyles: SxProps<Theme> = {
   alignItems: 'center',
   mb: 1,
   ml: 0.5,
+  mt: 1,
 };
 
 const typographyStyles: SxProps<Theme> = {
