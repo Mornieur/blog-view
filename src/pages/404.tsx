@@ -49,6 +49,7 @@ const Error404: React.FC = () => {
           to="/"
           variant="contained"
           sx={{ mt: 2, backgroundColor: '#6e3296' }}
+          role="button"
         >
           Go Home
         </Button>
