@@ -1,7 +1,7 @@
 import { GlobalStyles } from '@mui/material';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import AppRouter from './Router';
+import AppRouter from './router';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
