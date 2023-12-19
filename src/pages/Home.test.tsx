@@ -34,7 +34,7 @@ describe('Home', () => {
 
     render(<Home />);
     expect(screen.getByTestId('loading-box')).toBeInTheDocument();
-    expect(screen.getByText('Carregando...')).toBeInTheDocument();
+    expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
   it('shows the error message when there is an error', () => {
@@ -47,7 +47,7 @@ describe('Home', () => {
 
     render(<Home />);
     expect(
-      screen.getByText('Ocorreu um erro. Tente novamente mais tarde.')
+      screen.getByText('An error has occurred. Try again later.')
     ).toBeInTheDocument();
   });
 

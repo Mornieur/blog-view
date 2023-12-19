@@ -4,7 +4,6 @@ import '@testing-library/jest-dom/extend-expect';
 import PostItem from '../PostItem';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-// Mock the navigate function from useNavigate
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: () => jest.fn(),

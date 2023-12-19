@@ -5,7 +5,7 @@ import Feed from '../Feed';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { BlogPost } from '../../services/useGetBlogPosts';
 
-jest.mock('../components/PostItem', () => {
+jest.mock('../PostItem', () => {
   return ({ post }: { post: BlogPost }) => (
     <div data-testid={`post-item-${post.id}`}>{post.title}</div>
   );
@@ -36,9 +36,7 @@ describe('Feed', () => {
         <Feed searchQuery="" isLoading={false} isError={true} posts={[]} />
       </Router>
     );
-    expect(
-      screen.getByText('Nenhuma postagem encontrada.')
-    ).toBeInTheDocument();
+    expect(screen.getByText('No posts found.')).toBeInTheDocument();
   });
 
   it('displays posts when provided', () => {

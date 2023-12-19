@@ -20,7 +20,7 @@ describe('Post', () => {
     });
 
     render(<Post />);
-    expect(screen.getByText('Carregando...')).toBeInTheDocument();
+    expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
   it('renders error message when there is an error', () => {
@@ -33,7 +33,7 @@ describe('Post', () => {
 
     render(<Post />);
     expect(
-      screen.getByText('Erro ao carregar o post ou o post não existe.')
+      screen.getByText('Error loading the post or the post does not exist.')
     ).toBeInTheDocument();
   });
 
