@@ -23,7 +23,6 @@ describe('Header Component', () => {
   const mockSetSearchQuery = jest.fn();
 
   beforeEach(() => {
-    // Default mock for useIsMobile hook
     (useIsMobile as jest.Mock).mockReturnValue(false);
   });
 
