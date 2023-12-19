@@ -1,5 +1,6 @@
 import React from 'react';
-import { Menu, MenuItem } from '@mui/material';
+import { Menu } from '@mui/material';
+import MenuItemComponent from './MenuItemComponent';
 
 interface MenuComponentProps {
   anchorEl: HTMLElement | null;
@@ -11,21 +12,33 @@ const MenuComponent: React.FC<MenuComponentProps> = ({
   anchorEl,
   isMenuOpen,
   handleMenuClose,
-}) => (
-  <Menu
-    anchorEl={anchorEl}
-    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-    keepMounted
-    transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-    open={isMenuOpen}
-    onClose={handleMenuClose}
-  >
-    <MenuItem onClick={handleMenuClose}>My profile</MenuItem>
-    <MenuItem onClick={handleMenuClose}>How to use</MenuItem>
-    <MenuItem onClick={handleMenuClose}>Help</MenuItem>
-    <MenuItem onClick={handleMenuClose}>Contact us</MenuItem>
-    <MenuItem onClick={handleMenuClose}>Terms and Policies of Use</MenuItem>
-  </Menu>
-);
+}) => {
+  const menuItems = [
+    'My profile',
+    'How to use',
+    'Help',
+    'Contact us',
+    'Terms and Policies of Use',
+  ];
+
+  return (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      {menuItems.map((item) => (
+        <MenuItemComponent
+          key={item}
+          text={item}
+          handleMenuClose={handleMenuClose}
+        />
+      ))}
+    </Menu>
+  );
+};
 
 export default MenuComponent;
