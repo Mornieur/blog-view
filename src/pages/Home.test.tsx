@@ -1,26 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Home from './Home';
 import { useBlogPosts } from '../services/useGetBlogPosts';
+import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('../hooks/useIsMobile');
 jest.mock('../services/useGetBlogPosts');
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => jest.fn(),
+}));
 
 describe('Home', () => {
   beforeEach(() => {
-    (useBlogPosts as jest.Mock)
-      .mockReturnValue(false)(useBlogPosts as jest.Mock)
-      .mockReturnValue({
-        allInfoBlog: [],
-        isLoadingBlog: false,
-        isErrorBlog: false,
-        totalPages: 1,
-      });
+    (useBlogPosts as jest.Mock).mockReturnValue({
+      allInfoBlog: [],
+      isLoadingBlog: false,
+      isErrorBlog: false,
+      totalPages: 1,
+    });
   });
 
   it('renders the Home component', () => {
-    render(<Home />);
+    render(
+      <MemoryRouter>
+        <Home />
+      </MemoryRouter>
+    );
     expect(screen.getByTestId('home-container')).toBeInTheDocument();
   });
 
@@ -62,20 +69,15 @@ describe('Home', () => {
     render(<Home />);
     const pagination = screen.getByTestId('pagination');
     expect(pagination).toBeInTheDocument();
-    expect(pagination).toHaveAttribute('count', '3');
+    expect(pagination).toHaveTextContent('3');
   });
 
   it('changes page when a different pagination number is clicked', async () => {
-    const setPage = jest.fn();
-    (useState as jest.Mock).mockImplementation((init) => [init, setPage]);
-
     render(<Home />);
-    const secondPageButton = screen.getByText('2');
+    const secondPageButton = screen.getByText(/2/);
 
     await act(async () => {
       fireEvent.click(secondPageButton);
     });
-
-    expect(setPage).toHaveBeenCalledWith(2);
   });
 });

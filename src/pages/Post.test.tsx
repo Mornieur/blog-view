@@ -7,6 +7,7 @@ import { useBlogPosts } from '../services/useGetBlogPosts';
 
 jest.mock('react-router-dom', () => ({
   useParams: jest.fn(),
+  useNavigate: () => jest.fn(),
 }));
 jest.mock('../services/useGetBlogPosts');
 

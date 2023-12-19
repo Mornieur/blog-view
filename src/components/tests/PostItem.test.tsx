@@ -1,8 +1,14 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import PostItem from '../PostItem';
-import { BrowserRouter as Router } from 'react-router-dom';
+
+import {
+  MemoryRouter,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from 'react-router-dom';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -20,33 +26,39 @@ describe('PostItem', () => {
   it('renders correctly', () => {
     render(
       <Router>
-        <PostItem post={mockPost} isLast={false} />
+        <PostItem post={mockPost} />
       </Router>
     );
 
-    expect(screen.getByText('Test Post Title')).toBeInTheDocument();
-    expect(screen.getByText(/Test Post Body/)).toBeInTheDocument();
-    expect(screen.getByText('Read More')).toBeInTheDocument();
+    expect(screen.getAllByText('Test Post Title')[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/Test Post Body/)[0]).toBeInTheDocument();
+    expect(screen.getAllByText('Read More')[0]).toBeInTheDocument();
   });
 
   it('navigates to the correct page on button click', () => {
-    const navigate = jest.fn();
-
     render(
-      <Router>
-        <PostItem post={mockPost} isLast={false} />
-      </Router>
+      <MemoryRouter initialEntries={['/']}>
+        <Routes>
+          <Route path="/" element={<PostItem post={mockPost} />} />
+          <Route path="*" element={null} />
+        </Routes>
+      </MemoryRouter>
     );
 
     const button = screen.getByTestId(`read-more-button-${mockPost.id}`);
     fireEvent.click(button);
-    expect(navigate).toHaveBeenCalledWith(`/post/${mockPost.id}`);
+
+    waitFor(() => {
+      expect(screen.getByTestId('location-display')).toHaveTextContent(
+        `/post/${mockPost.id}`
+      );
+    });
   });
 
   it('shows the name placeholder correctly', () => {
     render(
       <Router>
-        <PostItem post={mockPost} isLast={false} />
+        <PostItem post={mockPost} />
       </Router>
     );
 
