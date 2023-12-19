@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-  Button,
-  Box,
-  Skeleton,
-} from '@mui/material';
+import { List, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { BlogPost } from '../services/useGetBlogPosts';
 import PostItem from './PostItem';
@@ -27,10 +19,6 @@ const Feed: React.FC<FeedProps> = ({
   posts,
 }) => {
   const navigate = useNavigate();
-
-  const handleDataBlog = (post: BlogPost) => {
-    navigate(`/post/${post.id}`);
-  };
 
   const filteredPosts = posts.filter(
     (post) =>
