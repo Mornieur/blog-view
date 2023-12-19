@@ -1,4 +1,3 @@
-// Footer.test.tsx
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
@@ -12,12 +11,3 @@ test('renders Footer component', () => {
     getByText(`© ${currentYear} My Blog Company. All Rights Reserved.`)
   ).toBeInTheDocument();
 });
-
-test('has the correct background color and text color', () => {
-  const { container } = render(<Footer />);
-  const footerElement = container.firstChild;
-  // expect(footerElement).toHaveStyle('background-color: rgb(110, 50, 150)');
-  // expect(footerElement).toHaveStyle('color: white');
-});
-
-//verificar teste de colors
