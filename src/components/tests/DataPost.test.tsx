@@ -20,4 +20,15 @@ describe('DataPost Component', () => {
 
     expect(screen.getByTestId('skeleton')).toBeInTheDocument();
   });
+
+  it('renders the body correctly', () => {
+    const title = 'Test Title';
+    const body = 'Test Body';
+
+    render(<DataPost title={title} body={body} />);
+
+    const bodyElement = screen.getByText(body);
+    expect(bodyElement).toBeInTheDocument();
+    expect(bodyElement.textContent).toBe(body);
+  });
 });
