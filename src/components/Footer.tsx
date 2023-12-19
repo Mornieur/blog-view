@@ -1,24 +1,26 @@
 import React from 'react';
-import { Box, Typography, Container } from '@mui/material';
+import { Box, Typography, Container, SxProps, Theme } from '@mui/material';
+
+const footerStyles: SxProps<Theme> = {
+  bgcolor: '#6e3296',
+  color: 'white',
+  padding: '0.5rem 0',
+  width: '100%',
+  position: 'fixed',
+  bottom: 0,
+};
 
 const Footer = () => {
+  const year = new Date().getFullYear();
+
   return (
-    <Box
-      sx={{
-        bgcolor: '#6e3296',
-        color: 'white',
-        padding: '0.5rem 0',
-        width: '100%',
-        position: 'fixed',
-        bottom: 0,
-      }}
-    >
+    <Box sx={footerStyles}>
       <Container maxWidth="lg">
         <Typography variant="h6" align="center" gutterBottom>
           My Blog
         </Typography>
         <Typography variant="subtitle1" align="center" component="p">
-          © {new Date().getFullYear()} My Blog Company. All Rights Reserved.
+          © {year} My Blog Company. All Rights Reserved.
         </Typography>
       </Container>
     </Box>
