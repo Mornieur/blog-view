@@ -10,12 +10,14 @@ export interface BlogPost {
   body: string;
 }
 
-export const useBlogPosts = (id?: string) => {
+export const useBlogPosts = (id?: string, pages?: number) => {
   const [data, setData] = useState<BlogPost[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
+  const [totalPosts, setTotalPosts] = useState(0);
+
   const limit = 10;
 
   const fetchPosts = useCallback(async () => {
@@ -25,6 +27,9 @@ export const useBlogPosts = (id?: string) => {
       const response = await axios.get(`${BASE_URL}${endpoint}`, {
         params: id ? {} : { _page: page, _limit: limit },
       });
+
+      const total = parseInt(response.headers['x-total-count'], 10);
+      setTotalPosts(total);
 
       if (id) {
         setData([response.data]);
@@ -41,9 +46,11 @@ export const useBlogPosts = (id?: string) => {
     }
   }, [id, page, limit]);
 
+  const totalPages = Math.ceil(totalPosts / limit);
+
   useEffect(() => {
     fetchPosts();
-  }, [fetchPosts]);
+  }, [fetchPosts, pages]);
 
   return {
     allInfoBlog: data as BlogPost[],
@@ -51,5 +58,6 @@ export const useBlogPosts = (id?: string) => {
     isErrorBlog: isError,
     hasMoreBlog: hasMore,
     setPage,
+    totalPages,
   };
 };
