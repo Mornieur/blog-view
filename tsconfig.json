@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "types": ["vite/client", "node"],
+    "types": ["vite/client", "node", "react-router-dom"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
