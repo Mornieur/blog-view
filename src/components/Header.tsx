@@ -9,12 +9,12 @@ import {
   SxProps,
   Theme,
 } from '@mui/material';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
 import FaceIcon from '@mui/icons-material/Face';
 import { SearchBar } from './Search';
 import { useIsMobile } from '../hooks/useIsMobile';
 import MenuComponent from './MenuComponent';
+import AcUnitIcon from '@mui/icons-material/AcUnit';
 
 const appBarStyles: SxProps<Theme> = {
   backgroundColor: '#6e3296',
@@ -54,7 +54,7 @@ const listItemStyles: SxProps<Theme> = {
 };
 
 const faceIconStyles: SxProps<Theme> = {
-  color: '#fff',
+  color: '#f98404',
   marginRight: 1,
   fontSize: '3rem',
 };
@@ -95,13 +95,13 @@ const Header: React.FC<HeaderProps> = ({ setSearchQuery }) => {
   return (
     <AppBar position="static" sx={appBarStyles}>
       <Toolbar>
-        <AccountCircleIcon sx={accountIconStyles} />
+        <AcUnitIcon sx={accountIconStyles} />
         <SearchBar setSearchQuery={setSearchQuery} />
         {!isMobile && (
           <>
             <div style={divStyles}>
               <Typography sx={typographyStyles} variant="h6">
-                My Blog
+                Blog View
               </Typography>
             </div>
             <article>
