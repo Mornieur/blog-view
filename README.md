@@ -22,6 +22,23 @@ Welcome to Blog View, your modern space for engaging with blog content. We use t
 - **Responsive Across Devices**: Crafted for compatibility, our blog adjusts beautifully to desktop, tablet, or mobile screens.
 - **Elegant Material-UI Design**: Experience a visually coherent interface, thanks to the integration of Material-UI components.
 
+## 📂 Project Structure
+
+Below is the main structure of our project:
+
+- `src/`: Source files for the application.
+- `assets/`: Static files like images and global styles.
+- `components/`: All React components used in the application.
+- `tests/`: Test files for the components.
+- `hooks/`: Custom React hooks.
+- `pages/`: Page components and tests.
+- `routes/`: Routing setup for the application.
+- `services/`: Services for external API calls.
+- `theme/`: Material-UI theme configuration.
+- `public/`: Public files, including index.html.
+- `build/`: Compiled and ready-to-deploy application files.
+- `node_modules/`: Project dependencies.
+
 ## 🛠 Tech Stack
 
 - **React**: A JavaScript library for building user interfaces.
