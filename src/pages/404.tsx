@@ -2,6 +2,7 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { Box, Typography, Button, SxProps, Theme } from '@mui/material';
+import ErrorImage from '../assets/error-404.png';
 
 const boxErrorStyles: SxProps<Theme> = {
   display: 'flex',
@@ -44,7 +45,7 @@ const Error404: React.FC = () => {
         Error 404
       </Typography>
       <img
-        src={require('../assets/error-404.png')}
+        src={ErrorImage}
         alt="Error 404"
         style={{
           maxWidth: '100%',
