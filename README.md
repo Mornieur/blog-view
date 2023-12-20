@@ -27,7 +27,8 @@ Welcome to Blog View, your modern space for engaging with blog content. We use t
 - **React**: A JavaScript library for building user interfaces.
 - **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript.
 - **Material-UI**: A popular React UI framework.
-- **Jest**: A delightful JavaScript Testing Framework with a focus on simplicity.
+- **Vite**: A blazing fast build tool for modern web projects.
+- **Vitest**: A Vite-native unit test framework that's fast and lightweight.
 - **React Testing Library**: Builds on top of DOM Testing Library by adding APIs for working with React components.
 
 ## 🌟 Getting Started
@@ -70,7 +71,7 @@ npm install
 Run the development server:
 
 ```
-npm run start
+npm run dev
 ```
 
 ## 🧪 Running Tests
