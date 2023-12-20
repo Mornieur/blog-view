@@ -5,16 +5,14 @@
 </div>
 
 <div align='center'>
-  <img src="./public/my-blog.jpg" alt='project image' width='600'  />
+  <img src="./src/assets/blog-view.png" alt='project image' width='600'  />
 </div>
 
 <br />
 
-This project is a simple blog interface that showcases posts retrieved from the `https://jsonplaceholder.typicode.com` API. Users can view post titles and excerpts on the main feed, search for posts, and view entire posts by clicking on them.
-
 ## 🚀 Introduction
 
-Welcome to Blog View - a sleek, modern blog interface that brings content to life. Our platform harnesses the power of https://jsonplaceholder.typicode.com API, presenting users with a captivating way to explore blog posts.
+Welcome to Blog View, your modern space for engaging with blog content. We use the https://jsonplaceholder.typicode.com API to deliver a seamless reading experience.
 
 ## ✨ Key Features
 
