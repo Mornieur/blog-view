@@ -3,7 +3,7 @@ import Post from '../pages/Post';
 import Home from '../pages/Home';
 import Error404 from '../pages/404';
 
-export default function AppRouter() {
+const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -13,4 +13,6 @@ export default function AppRouter() {
       </Routes>
     </BrowserRouter>
   );
-}
+};
+
+export default AppRouter;
