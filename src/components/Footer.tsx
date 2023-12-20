@@ -17,10 +17,10 @@ const Footer = () => {
     <Box sx={footerStyles}>
       <Container maxWidth="lg">
         <Typography variant="h6" align="center" gutterBottom>
-          My Blog
+          Blog View
         </Typography>
         <Typography variant="subtitle1" align="center" component="p">
-          © {year} My Blog Company. All Rights Reserved.
+          © {year} Blog View Company. All Rights Reserved.
         </Typography>
       </Container>
     </Box>
