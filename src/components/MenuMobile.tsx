@@ -31,7 +31,7 @@ const menuMobileStyles: SxProps<Theme> = {
   boxShadow: '0 -2px 5px 0 rgba(0,0,0,0.2)',
 };
 
-const iconButtonStyles = {
+const iconButtonStyles: SxProps<Theme> = {
   width: '20px',
   p: 1,
   ml: 1,
