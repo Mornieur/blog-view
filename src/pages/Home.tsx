@@ -7,7 +7,7 @@ import {
   Theme,
   Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Feed from '../components/Feed';
 import Header from '../components/Header';
 import MenuMobile from '../components/MenuMobile';
