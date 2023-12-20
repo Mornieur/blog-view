@@ -21,6 +21,7 @@ const listItemStyles: SxProps<Theme> = {
   gap: 1,
   display: 'flex',
   flexDirection: 'column',
+  flexGrow: 1,
 };
 
 const boxStyles: SxProps<Theme> = {
@@ -39,7 +40,7 @@ const typographyStyles: SxProps<Theme> = {
 };
 
 const buttonStyles: SxProps<Theme> = {
-  backgroundColor: '#6e3296',
+  backgroundColor: '#f98404',
   padding: '10px 20px',
   lineHeight: 0,
   border: 'medium',
