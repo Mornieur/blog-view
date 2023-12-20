@@ -24,7 +24,10 @@ export const useBlogPosts = (id?: string, pages?: number) => {
     setIsLoading(true);
     try {
       const endpoint = id ? `/posts/${id}` : '/posts';
-      const response = await axios.get(`${BASE_URL}${endpoint}`, {
+      const uri = id
+        ? `${BASE_URL}${endpoint}`
+        : `${BASE_URL}${endpoint}?_page=${page || 1}&_limit=${limit}`;
+      const response = await axios.get(uri, {
         params: id ? {} : { _page: page, _limit: limit },
       });
 
@@ -35,7 +38,7 @@ export const useBlogPosts = (id?: string, pages?: number) => {
         setData([response.data]);
         setHasMore(false);
       } else {
-        setData((prevPosts) => [...prevPosts, ...response.data]);
+        setData(response.data);
         setHasMore(response.data.length > 0);
       }
     } catch (error) {
@@ -50,7 +53,11 @@ export const useBlogPosts = (id?: string, pages?: number) => {
 
   useEffect(() => {
     fetchPosts();
-  }, [fetchPosts, pages]);
+  }, [fetchPosts, page]);
+
+  useEffect(() => {
+    setPage(pages || 1);
+  }, [pages]);
 
   return {
     allInfoBlog: data as BlogPost[],
