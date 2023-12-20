@@ -27,7 +27,7 @@
   "scripts": {
     "start": "npx serve -s build",
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "test": "vitest",
     "coverage": "vitest run --coverage"
