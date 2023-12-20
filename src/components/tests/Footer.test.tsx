@@ -6,8 +6,8 @@ import Footer from '../Footer';
 test('renders Footer component', () => {
   const { getByText } = render(<Footer />);
   const currentYear = new Date().getFullYear();
-  expect(getByText('My Blog')).toBeInTheDocument();
+  expect(getByText('Blog View')).toBeInTheDocument();
   expect(
-    getByText(`© ${currentYear} My Blog Company. All Rights Reserved.`)
+    getByText(`© ${currentYear} Blog View Company. All Rights Reserved.`)
   ).toBeInTheDocument();
 });
