@@ -14,6 +14,8 @@ import MenuMobile from '../components/MenuMobile';
 import SuggestedBox from '../components/SuggestedBox';
 import { useIsMobile } from '../hooks/useIsMobile';
 import { useBlogPosts } from '../services/useGetBlogPosts';
+import { useQuery } from '../hooks/useQuery';
+import { useNavigate } from 'react-router';
 
 const loadingStyles: SxProps<Theme> = {
   textAlign: 'center',
@@ -36,6 +38,7 @@ const contentContainerStyles: SxProps<Theme> = {
   padding: 2,
   gap: 1,
   justifyContent: 'center',
+  flexGrow: 1,
 };
 
 const homeStyles: SxProps<Theme> = {
@@ -44,10 +47,11 @@ const homeStyles: SxProps<Theme> = {
   justifyContent: 'center',
   alignItems: 'center',
   width: '100%',
+  minHeight: '100vh',
   height: '100%',
   backgroundColor: '#ececec',
   position: 'relative',
-  mb: 4,
+  pb: 4,
 };
 
 const desktopContentStyles = {
@@ -59,19 +63,17 @@ const desktopContentStyles = {
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestionView, setSuggestionView] = useState(false);
-  const [page, setPage] = useState(1);
   const isMobile = useIsMobile();
-
-  useEffect(() => {
-    setPage(1);
-  }, [searchQuery]);
+  let query = useQuery();
+  const [page, setPage] = useState(+query.get('page')! || 1);
+  const navigate = useNavigate();
 
   const {
     allInfoBlog: posts,
     isLoadingBlog: isLoading,
     isErrorBlog: isError,
     totalPages,
-  } = useBlogPosts('', page);
+  } = useBlogPosts(undefined, page);
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -82,6 +84,7 @@ const Home = () => {
       const element = document.getElementById('posts-list');
       if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        navigate(`/?page=${value}`);
       }
     }, 100);
   };
@@ -133,7 +136,7 @@ const Home = () => {
           count={totalPages}
           page={page}
           onChange={handlePageChange}
-          color="primary"
+          color="secondary"
           showFirstButton
           showLastButton
           size="large"
