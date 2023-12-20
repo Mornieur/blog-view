@@ -56,6 +56,7 @@ const postListStyle: SxProps<Theme> = {
   maxWidth: 700,
   borderRadius: '10px',
   backgroundColor: '#fff',
+  flexGrow: 1,
 };
 
 const Feed: React.FC<FeedProps> = ({
