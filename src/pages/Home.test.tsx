@@ -3,7 +3,7 @@ import { render, screen, fireEvent, act } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Home from './Home';
 import { useBlogPosts } from '../services/useGetBlogPosts';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, BrowserRouter as Router } from 'react-router-dom';
 
 jest.mock('../hooks/useIsMobile');
 jest.mock('../services/useGetBlogPosts');
@@ -39,7 +39,11 @@ describe('Home', () => {
       totalPages: 0,
     });
 
-    render(<Home />);
+    render(
+      <Router>
+        <Home />
+      </Router>
+    );
     expect(screen.getByTestId('loading-box')).toBeInTheDocument();
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
@@ -52,7 +56,11 @@ describe('Home', () => {
       totalPages: 0,
     });
 
-    render(<Home />);
+    render(
+      <Router>
+        <Home />
+      </Router>
+    );
     expect(
       screen.getByText('An error has occurred. Try again later.')
     ).toBeInTheDocument();
@@ -66,14 +74,22 @@ describe('Home', () => {
       totalPages: 3,
     });
 
-    render(<Home />);
+    render(
+      <Router>
+        <Home />
+      </Router>
+    );
     const pagination = screen.getByTestId('pagination');
     expect(pagination).toBeInTheDocument();
     expect(pagination).toHaveTextContent('3');
   });
 
   it('changes page when a different pagination number is clicked', async () => {
-    render(<Home />);
+    render(
+      <Router>
+        <Home />
+      </Router>
+    );
     const secondPageButton = screen.getByText(/2/);
 
     await act(async () => {
