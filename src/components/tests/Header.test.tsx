@@ -29,7 +29,7 @@ describe('Header Component', () => {
   test('renders Header component', () => {
     render(<Header setSearchQuery={mockSetSearchQuery} />);
     expect(screen.getByTestId('mock-menu')).toBeInTheDocument();
-    expect(screen.getByText('My Blog')).toBeInTheDocument();
+    expect(screen.getByText('Blog View')).toBeInTheDocument();
     expect(screen.getByLabelText('open drawer')).toBeInTheDocument();
   });
 
