@@ -1,13 +1,14 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import Footer from '../Footer';
+import { test, expect } from 'vitest';
 
 test('renders Footer component', () => {
-  const { getByText } = render(<Footer />);
+  render(<Footer />);
   const currentYear = new Date().getFullYear();
-  expect(getByText('Blog View')).toBeInTheDocument();
+  expect(screen.getByText('Blog View')).toBeInTheDocument();
   expect(
-    getByText(`© ${currentYear} Blog View Company. All Rights Reserved.`)
+    screen.getByText(`© ${currentYear} Blog View Company. All Rights Reserved.`)
   ).toBeInTheDocument();
 });

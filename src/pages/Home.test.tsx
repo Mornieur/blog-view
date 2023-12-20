@@ -1,23 +1,29 @@
 import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import Home from './Home';
 import { useBlogPosts } from '../services/useGetBlogPosts';
 import { MemoryRouter, BrowserRouter as Router } from 'react-router-dom';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 
-jest.mock('../hooks/useIsMobile');
-jest.mock('../services/useGetBlogPosts');
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: () => jest.fn(),
-}));
+vi.mock('../hooks/useIsMobile');
+vi.mock('../services/useGetBlogPosts');
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual('react-router-dom');
+  return {
+    ...actual,
+    useNavigate: () => vi.fn(),
+  };
+});
 
 describe('Home', () => {
   beforeEach(() => {
-    (useBlogPosts as jest.Mock).mockReturnValue({
+    vi.mocked(useBlogPosts).mockReturnValue({
       allInfoBlog: [],
       isLoadingBlog: false,
       isErrorBlog: false,
+      hasMoreBlog: false,
+      setPage: vi.fn(),
       totalPages: 1,
     });
   });
@@ -32,10 +38,12 @@ describe('Home', () => {
   });
 
   it('shows the loading state', () => {
-    (useBlogPosts as jest.Mock).mockReturnValue({
+    vi.mocked(useBlogPosts).mockReturnValue({
       allInfoBlog: [],
       isLoadingBlog: true,
       isErrorBlog: false,
+      hasMoreBlog: false,
+      setPage: vi.fn(),
       totalPages: 0,
     });
 
@@ -49,10 +57,12 @@ describe('Home', () => {
   });
 
   it('shows the error message when there is an error', () => {
-    (useBlogPosts as jest.Mock).mockReturnValue({
+    vi.mocked(useBlogPosts).mockReturnValue({
       allInfoBlog: [],
       isLoadingBlog: false,
       isErrorBlog: true,
+      hasMoreBlog: false,
+      setPage: vi.fn(),
       totalPages: 0,
     });
 
@@ -67,10 +77,12 @@ describe('Home', () => {
   });
 
   it('shows the Pagination component when not loading', () => {
-    (useBlogPosts as jest.Mock).mockReturnValue({
+    vi.mocked(useBlogPosts).mockReturnValue({
       allInfoBlog: [],
       isLoadingBlog: false,
       isErrorBlog: false,
+      hasMoreBlog: false,
+      setPage: vi.fn(),
       totalPages: 3,
     });
 

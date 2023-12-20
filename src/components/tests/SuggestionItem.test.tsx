@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import SuggestionItem from '../SuggestionItem';
+import { describe, it, expect } from 'vitest';
 
 describe('SuggestionItem', () => {
   it('renders the suggestion text correctly', () => {

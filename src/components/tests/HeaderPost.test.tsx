@@ -3,16 +3,17 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import HeaderPost from '../HeaderPost';
 import { useNavigate } from 'react-router-dom';
+import { describe, test, expect, beforeEach, vi } from 'vitest';
 
-jest.mock('react-router-dom', () => ({
-  useNavigate: jest.fn(),
+vi.mock('react-router-dom', () => ({
+  useNavigate: vi.fn(),
 }));
 
 describe('HeaderPost Component', () => {
-  const mockNavigate = jest.fn();
+  const mockNavigate = vi.fn();
 
   beforeEach(() => {
-    (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
+    vi.mocked(useNavigate).mockReturnValue(mockNavigate);
   });
 
   test('renders HeaderPost component', () => {

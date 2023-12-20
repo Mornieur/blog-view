@@ -3,13 +3,14 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Header from '../Header';
 import { useIsMobile } from '../../hooks/useIsMobile';
+import { describe, test, expect, beforeEach, vi } from 'vitest';
 
-jest.mock('../../hooks/useIsMobile', () => ({
-  useIsMobile: jest.fn(),
+vi.mock('../../hooks/useIsMobile', () => ({
+  useIsMobile: vi.fn(),
 }));
-jest.mock('../MenuComponent', () => {
+
+vi.mock('../MenuComponent', () => {
   return {
-    __esModule: true,
     default: (props: { handleMenuClose: () => void }) => (
       <div data-testid="mock-menu">
         Mock Menu
@@ -20,10 +21,10 @@ jest.mock('../MenuComponent', () => {
 });
 
 describe('Header Component', () => {
-  const mockSetSearchQuery = jest.fn();
+  const mockSetSearchQuery = vi.fn();
 
   beforeEach(() => {
-    (useIsMobile as jest.Mock).mockReturnValue(false);
+    vi.mocked(useIsMobile).mockReturnValue(false);
   });
 
   test('renders Header component', () => {
@@ -46,7 +47,7 @@ describe('Header Component', () => {
   });
 
   test('renders different layout for mobile', () => {
-    (useIsMobile as jest.Mock).mockReturnValue(true);
+    vi.mocked(useIsMobile).mockReturnValue(true);
     render(<Header setSearchQuery={mockSetSearchQuery} />);
   });
 });

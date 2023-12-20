@@ -1,19 +1,17 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import PostItem from '../PostItem';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { describe, it, expect, vi } from 'vitest';
 
-import {
-  MemoryRouter,
-  Route,
-  BrowserRouter as Router,
-  Routes,
-} from 'react-router-dom';
-
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: () => jest.fn(),
-}));
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual('react-router-dom');
+  return {
+    ...actual,
+    useNavigate: () => vi.fn(),
+  };
+});
 
 describe('PostItem', () => {
   const mockPost = {
@@ -25,9 +23,9 @@ describe('PostItem', () => {
 
   it('renders correctly', () => {
     render(
-      <Router>
+      <MemoryRouter>
         <PostItem post={mockPost} />
-      </Router>
+      </MemoryRouter>
     );
 
     expect(screen.getAllByText('Test Post Title')[0]).toBeInTheDocument();
@@ -35,7 +33,7 @@ describe('PostItem', () => {
     expect(screen.getAllByText('Read More')[0]).toBeInTheDocument();
   });
 
-  it('navigates to the correct page on button click', () => {
+  it('navigates to the correct page on button click', async () => {
     render(
       <MemoryRouter initialEntries={['/']}>
         <Routes>
@@ -47,7 +45,6 @@ describe('PostItem', () => {
 
     const button = screen.getByTestId(`read-more-button-${mockPost.id}`);
     fireEvent.click(button);
-
     waitFor(() => {
       expect(screen.getByTestId('location-display')).toHaveTextContent(
         `/post/${mockPost.id}`
@@ -57,9 +54,9 @@ describe('PostItem', () => {
 
   it('shows the name placeholder correctly', () => {
     render(
-      <Router>
+      <MemoryRouter>
         <PostItem post={mockPost} />
-      </Router>
+      </MemoryRouter>
     );
 
     expect(screen.getByText('Name')).toBeInTheDocument();

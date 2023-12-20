@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import DataPost from '../DataPost';
+import { describe, it, expect } from 'vitest';
 
 describe('DataPost Component', () => {
   it('renders the title and body', () => {
@@ -11,7 +12,6 @@ describe('DataPost Component', () => {
     render(<DataPost title={title} body={body} />);
 
     expect(screen.getByRole('heading', { name: title })).toBeInTheDocument();
-
     expect(screen.getByText(body)).toBeInTheDocument();
   });
 

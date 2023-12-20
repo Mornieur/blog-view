@@ -2,9 +2,10 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import MenuMobile from '../MenuMobile';
+import { describe, test, expect, beforeEach, vi } from 'vitest';
 
 describe('MenuMobile Component', () => {
-  const mockSetSuggestionOn = jest.fn();
+  const mockSetSuggestionOn = vi.fn();
 
   beforeEach(() => {
     render(<MenuMobile setSuggestionOn={mockSetSuggestionOn} />);

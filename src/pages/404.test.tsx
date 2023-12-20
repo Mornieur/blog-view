@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import Error404 from './404';
+import { describe, it, expect } from 'vitest';
 
 describe('Error404 Component', () => {
   it('renders the component and checks for text and elements', () => {

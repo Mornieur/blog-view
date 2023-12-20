@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import SuggestedBox from '../SuggestedBox';
+import { describe, test, expect } from 'vitest';
 
 describe('SuggestedBox Component', () => {
   test('renders SuggestedBox component with title and suggestions', () => {

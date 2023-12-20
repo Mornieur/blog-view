@@ -4,16 +4,23 @@ import '@testing-library/jest-dom';
 import Feed from '../Feed';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { BlogPost } from '../../services/useGetBlogPosts';
+import { describe, it, expect, vi } from 'vitest';
 
-jest.mock('../PostItem', () => {
-  return ({ post }: { post: BlogPost }) => (
-    <div data-testid={`post-item-${post.id}`}>{post.title}</div>
-  );
+vi.mock('../PostItem', () => {
+  return {
+    default: ({ post }: { post: BlogPost }) => (
+      <div data-testid={`post-item-${post.id}`}>{post.title}</div>
+    ),
+  };
 });
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: () => jest.fn(),
-}));
+
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual('react-router-dom');
+  return {
+    ...actual,
+    useNavigate: () => vi.fn(),
+  };
+});
 
 describe('Feed', () => {
   const mockPosts = [

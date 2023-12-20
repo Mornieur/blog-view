@@ -2,9 +2,10 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import MenuComponent from '../MenuComponent';
+import { describe, test, expect, vi } from 'vitest';
 
 describe('MenuComponent', () => {
-  const mockHandleMenuClose = jest.fn();
+  const mockHandleMenuClose = vi.fn();
 
   const renderMenu = (isMenuOpen: boolean) =>
     render(

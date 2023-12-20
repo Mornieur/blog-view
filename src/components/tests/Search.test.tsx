@@ -3,16 +3,17 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { SearchBar } from '../Search';
 import { useIsMobile } from '../../hooks/useIsMobile';
+import { describe, test, expect, beforeEach, vi } from 'vitest';
 
-jest.mock('../../hooks/useIsMobile', () => ({
-  useIsMobile: jest.fn(),
+vi.mock('../../hooks/useIsMobile', () => ({
+  useIsMobile: vi.fn(),
 }));
 
 describe('SearchBar Component', () => {
-  const mockSetSearchQuery = jest.fn();
+  const mockSetSearchQuery = vi.fn();
 
   beforeEach(() => {
-    (useIsMobile as jest.Mock).mockReturnValue(false);
+    vi.mocked(useIsMobile).mockReturnValue(false);
     render(<SearchBar setSearchQuery={mockSetSearchQuery} />);
   });
 

@@ -1,23 +1,31 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import Post from './Post';
 import { useParams } from 'react-router-dom';
 import { useBlogPosts } from '../services/useGetBlogPosts';
+import { describe, it, expect, vi } from 'vitest';
 
-jest.mock('react-router-dom', () => ({
-  useParams: jest.fn(),
-  useNavigate: () => jest.fn(),
-}));
-jest.mock('../services/useGetBlogPosts');
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual('react-router-dom');
+  return {
+    ...actual,
+    useParams: vi.fn(),
+    useNavigate: () => vi.fn(),
+  };
+});
+vi.mock('../services/useGetBlogPosts');
 
 describe('Post', () => {
   it('renders loading message when loading', () => {
-    (useParams as jest.Mock).mockReturnValue({ id: '1' });
-    (useBlogPosts as jest.Mock).mockReturnValue({
+    vi.mocked(useParams).mockReturnValue({ id: '1' });
+    vi.mocked(useBlogPosts).mockReturnValue({
       allInfoBlog: [],
       isLoadingBlog: true,
       isErrorBlog: false,
+      totalPages: 1,
+      hasMoreBlog: false,
+      setPage: vi.fn(),
     });
 
     render(<Post />);
@@ -25,11 +33,14 @@ describe('Post', () => {
   });
 
   it('renders error message when there is an error', () => {
-    (useParams as jest.Mock).mockReturnValue({ id: '1' });
-    (useBlogPosts as jest.Mock).mockReturnValue({
+    vi.mocked(useParams).mockReturnValue({ id: '1' });
+    vi.mocked(useBlogPosts).mockReturnValue({
       allInfoBlog: [],
       isLoadingBlog: false,
       isErrorBlog: true,
+      hasMoreBlog: false,
+      setPage: vi.fn(),
+      totalPages: 1,
     });
 
     render(<Post />);
@@ -39,8 +50,8 @@ describe('Post', () => {
   });
 
   it('renders the post data when not loading and no error', () => {
-    (useParams as jest.Mock).mockReturnValue({ id: '1' });
-    (useBlogPosts as jest.Mock).mockReturnValue({
+    vi.mocked(useParams).mockReturnValue({ id: '1' });
+    vi.mocked(useBlogPosts).mockReturnValue({
       allInfoBlog: [
         {
           id: 1,
@@ -51,6 +62,9 @@ describe('Post', () => {
       ],
       isLoadingBlog: false,
       isErrorBlog: false,
+      hasMoreBlog: false,
+      setPage: vi.fn(),
+      totalPages: 1,
     });
 
     render(<Post />);
