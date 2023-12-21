@@ -35,7 +35,7 @@ Below is the main structure of our project:
 - `routes/`: Routing setup for the application.
 - `services/`: Services for external API calls.
 - `theme/`: Material-UI theme configuration.
-- `public/`: Public files, including index.html.
+- `public/`: Public files.
 - `build/`: Compiled and ready-to-deploy application files.
 - `node_modules/`: Project dependencies.
 
